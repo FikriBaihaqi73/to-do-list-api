@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+// import swaggerUiDist from 'swagger-ui-dist'; // Tidak lagi diperlukan, file disalin ke public
 
 // Untuk ESM, __dirname tidak tersedia, jadi kita mendapatkannya
 const __filename = fileURLToPath(import.meta.url);
@@ -23,9 +24,13 @@ app.use(express.json());
 app.get('/', (req, res) => res.json({ message: 'Hello World!' }));
 app.use('/api/todos', todoRoutes);
 
-// Sajikan dokumentasi Swagger di /api-docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Sajikan aset statis Swagger UI dari direktori public yang disalin
+app.use('/api-docs', express.static(path.join(__dirname, '..' , 'public', 'swagger-ui-assets')));
+
+// Kemudian, setup Swagger UI itu sendiri
+app.use('/api-docs', swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+    // console.log(`Swagger UI static files served from: ${swaggerUiDist.getAbsoluteFSPath()}`); // Tidak lagi relevan
 });
