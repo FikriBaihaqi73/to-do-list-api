@@ -3,7 +3,7 @@
     {
       "src": "src/server.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["src/docs/**"] }
+      "config": { "includeFiles": ["src/docs/**", "node_modules/swagger-ui-dist/**"] }
     }
   ],
   "routes": [

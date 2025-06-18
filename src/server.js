@@ -24,11 +24,8 @@ app.use(express.json());
 app.get('/', (req, res) => res.json({ message: 'Hello World!' }));
 app.use('/api/todos', todoRoutes);
 
-// Sajikan aset statis Swagger UI dari direktori public yang disalin
-app.use('/api-docs', express.static(path.join(__dirname, '..' , 'public', 'swagger-ui-assets')));
-
-// Kemudian, setup Swagger UI itu sendiri
-app.use('/api-docs', swaggerUi.setup(swaggerSpec));
+// Sajikan dokumentasi Swagger di /api-docs menggunakan swaggerUi.serve dan swaggerUi.setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
