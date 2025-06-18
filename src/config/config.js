@@ -29,7 +29,13 @@ const config = {
     "database": process.env.DB_DATABASE_PROD || "database_production",
     "host": process.env.DB_HOST,
     "port": process.env.DB_PORT,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false // Penting untuk Vercel jika sertifikat self-signed atau tidak diverifikasi
+      }
+    }
   }
 };
 
