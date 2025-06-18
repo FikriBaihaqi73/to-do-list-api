@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  title: To-Do List API
+  version: 1.0.0
+  description: A simple To-Do List API built with Node.js, Express, and PostgreSQL (Sequelize).
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+
+tags:
+  - name: Todos
+    description: To-Do management
+
+paths:
+  /todos:
+    get:
+      summary: Get all To-Do items
+      tags:
+        - Todos
+      responses:
+        '200':
+          description: A list of To-Do items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new To-Do item
+      tags:
+        - Todos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  description: The title of the To-Do item.
+      responses:
+        '201':
+          description: The created To-Do item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /todos/{id}:
+    put:
+      summary: Update a To-Do item
+      tags:
+        - Todos
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the To-Do item to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  description: The updated title of the To-Do item.
+      responses:
+        '200':
+          description: To-Do item updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Todo updated successfully
+        '404':
+          description: To-Do item not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a To-Do item
+      tags:
+        - Todos
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the To-Do item to delete.
+      responses:
+        '200':
+          description: To-Do item deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: berhasil hapus todo
+        '404':
+          description: To-Do item not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique ID of the To-Do item.
+          example: 1
+        title:
+          type: string
+          description: The title of the To-Do item.
+          example: Buy groceries
+        createdAt:
+          type: string
+          format: date-time
+          description: The creation timestamp of the To-Do item.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The last update timestamp of the To-Do item.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: Internal server error 
