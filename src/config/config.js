@@ -30,10 +30,11 @@ const config = {
     "host": process.env.DB_HOST,
     "port": process.env.DB_PORT,
     "dialect": "postgres",
+    "ssl": true,
     "dialectOptions": {
       "ssl": {
         "require": true,
-        "rejectUnauthorized": false // Penting untuk Vercel jika sertifikat self-signed atau tidak diverifikasi
+        "rejectUnauthorized": false // Hanya untuk development/lokal, jangan gunakan di produksi tanpa pemahaman penuh
       }
     }
   }
