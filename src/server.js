@@ -1,3 +1,4 @@
+import 'pg'; // Explicitly import pg for Vercel deployment issues
 import express from 'express';
 import todoRoutes from './routes/todos.routes.js';
 import cors from 'cors';

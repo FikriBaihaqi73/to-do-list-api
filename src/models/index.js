@@ -6,6 +6,7 @@ import { Sequelize } from 'sequelize';
 import process from 'process';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import * as pg from 'pg';
 
 // Untuk ESM, __dirname tidak tersedia, jadi kita mendapatkannya
 const __filename = fileURLToPath(import.meta.url);
@@ -21,9 +22,9 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], { ...config, dialectModule: pg });
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password, { ...config, dialectModule: pg });
 }
 
 // Membaca model secara dinamis
