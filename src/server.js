@@ -18,7 +18,13 @@ const port = process.env.PORT || 3000;
 // Muat file spesifikasi Swagger YAML
 const swaggerSpec = YAML.load(path.join(__dirname, 'docs/swagger.yaml'));
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Mengizinkan dari semua origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Mengizinkan semua metode yang digunakan
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
+app.options('*', cors()); // Mengatasi preflight OPTIONS request
 app.use(express.json());
 
 app.get('/', (req, res) => res.json({ message: 'Hello World!' }));
