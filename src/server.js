@@ -6,7 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import swaggerUiDist from 'swagger-ui-dist'; // Tidak lagi diperlukan, file disalin ke public
+// import swaggerUiDist from 'swagger-ui-dist'; // Kita akan menonaktifkan ini lagi
 
 // Untuk ESM, __dirname tidak tersedia, jadi kita mendapatkannya
 const __filename = fileURLToPath(import.meta.url);
