@@ -19,8 +19,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 // Muat file spesifikasi Swagger YAML
-const swaggerSpec = YAML.load(path.join(__dirname, 'docs/swagger.yaml'));
-
+const swaggerSpec = YAML.load(path.join(process.cwd(), 'src/docs/swagger.yaml'));
 app.use(cors({
   origin: '*', // Mengizinkan dari semua origin
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Mengizinkan semua metode yang digunakan

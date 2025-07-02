@@ -60,5 +60,5 @@ export const updateTodo = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'gagal update todo' });
-    }
+  }
 };
