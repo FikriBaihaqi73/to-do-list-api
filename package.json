@@ -2,10 +2,10 @@
   "name": "to-do-list-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "api/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon api/index.js",
     "postinstall": "npm install pg"
   },
   "keywords": [],

@@ -1,5 +1,5 @@
 import express from 'express';
-import todoRoutes from './routes/todos.routes.js';
+import todoRoutes from '../src/routes/todos.routes.js';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
